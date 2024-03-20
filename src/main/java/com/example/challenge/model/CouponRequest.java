@@ -1,26 +1,24 @@
 package com.example.challenge.model;
 
-// CouponRequest.java
 import java.util.List;
 
 public class CouponRequest {
-    private List<String> itemIds;
-    private int amount;
+    private List<Long> itemIds;
+    private double amount;
 
-    public List<String> getItemIds() {
+    public List<Long> getItemIds() {
         return itemIds;
     }
 
-    public void setItemIds(List<String> itemIds) {
+    public void setItemIds(List<Long> itemIds) {
         this.itemIds = itemIds;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }
-

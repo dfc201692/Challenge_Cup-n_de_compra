@@ -1,26 +1,42 @@
 package com.example.challenge.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "item") // Nombre de la tabla en la base de datos
 public class Item {
 
-    private String itemId;
+    @Id // Indica que este campo es una clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el valor para este campo
+    @Column(name = "Item_Id") // Nombre de la columna en la base de datos
+    private Long itemId;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "quantity")
     private int quantity;
 
-    // Constructor
-    public Item(String itemId, String description, double price, int quantity) {
-        this.itemId = itemId;
+    // Constructor vacío requerido por JPA
+    public Item() {
+    }
+
+    // Constructor con todos los atributos excepto itemId
+    public Item(String description, double price, int quantity) {
         this.description = description;
         this.price = price;
         this.quantity = quantity;
     }
 
-    // Getters and setters
-    public String getItemId() {
+    // Getters y setters para todos los atributos
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -47,7 +63,4 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    // ... (Agrega métodos adicionales si es necesario)
-
 }

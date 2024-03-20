@@ -1,38 +1,43 @@
 package com.example.challenge.service;
 
 import com.example.challenge.model.Item;
+import com.example.challenge.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 @Service
 public class ItemService {
 
-    private final Map<String, Item> items; // Repositorio ficticio de items
+    private final ItemRepository itemRepository;
 
-    public ItemService() {
-        items = new HashMap<>();
-        // Inicializar el "repositorio" con algunos items
-        items.put("MLA1", new Item("MLA1", "Descripción del MLA1", 100.0, 1));
-        items.put("MLA2", new Item("MLA2", "Descripción del MLA2", 210.0, 1));
-        items.put("MLA3", new Item("MLA3", "Descripción del MLA3", 260.0, 1));
-        items.put("MLA4", new Item("MLA4", "Descripción del MLA4", 80.0, 1));
-        items.put("MLA5", new Item("MLA5", "Descripción del MLA5", 90.0, 1));
+    @Autowired
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
 
-    public List<Item> getItemsByIds(List<String> itemIds) {
-        List<Item> itemsFound = new ArrayList<>();
-        if (itemIds != null) {
-        for (String itemId : itemIds) {
-            Item item = items.get(itemId);
-            if (item != null) {
-                itemsFound.add(item);
-            }
+    public Item getItemById(Long id) {
+        return itemRepository.findById(id).orElse(null);
+    }
+
+    public Item saveItem(Item item) {
+        return itemRepository.save(item);
+    }
+
+    public void deleteItemById(Long id) {
+        itemRepository.deleteById(id);
+    }
+
+    public List<Item> getItemsByIds(List<Long> itemIds) {
+        if (itemIds == null || itemIds.isEmpty()) {
+            return Collections.emptyList();
         }
-        }
-        return itemsFound;
+        return itemRepository.findAllById(itemIds);
     }
 }
