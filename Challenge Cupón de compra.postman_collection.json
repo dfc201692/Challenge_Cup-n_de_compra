@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "3b242f0a-f3a3-4887-9478-0596a321fdb6",
+		"name": "Challenge Cupón de compra",
+		"description": "**Descripción y Endpoints**\n\n**Descripción:**  \nEl Challenge: Cupón de compra busca facilitar a los usuarios de Mercado Libre la adquisición de ítems favoritos utilizando un cupón de compra gratuito por un monto específico. La API proporciona servicios para obtener la lista de ítems que un usuario puede comprar con el cupón y para mostrar los 5 ítems más \"favoriteados\" por la comunidad.\n\n**Endpoints:**\n\n1. **Servicio para Obtener Ítems para el Cupón:**\n    \n    - Método: POST\n        \n    - Ruta: `/coupon/`\n        \n    - Descripción: Este servicio permite enviar una lista de IDs de ítems y el monto total del cupón, y devuelve la lista de ítems que un usuario puede comprar maximizando el gasto dentro del límite del cupón.\n        \n    - Parámetros:\n        \n        - `item_ids` (array de strings): Lista de IDs de ítems que el usuario desea comprar.\n            \n        - `amount` (number): Monto total del cupón.\n            \n    - { \"item_ids\": \\[\"MLA1\", \"MLA2\", \"MLA3\", \"MLA4\", \"MLA5\"\\], \"amount\": 500}\n        \n    - { \"item_ids\": \\[\"MLA1\", \"MLA2\", \"MLA4\", \"MLA5\"\\], \"total\": 480}\n        \n2. **Servicio para Obtener los 5 Ítems Más \"Favoriteados\":**\n    \n    - Método: GET\n        \n    - Ruta: `/coupon/stats`\n        \n    - Descripción: Este servicio devuelve los 5 ítems más populares entre la comunidad, basado en la cantidad de usuarios que los han marcado como favoritos.\n        \n    - \\[ { \"id\": \"MLA1\", \"quantity\": 15 }, { \"id\": \"MLA2\", \"quantity\": 10 }, // Otros ítems...\\]\n        \n\nCon estos endpoints, los usuarios podrán utilizar la API para obtener recomendaciones de compra basadas en sus ítems favoritos y descubrir los ítems más populares en la plataforma de Mercado Libre.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8340322"
+	},
+	"item": [
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "Guardar item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"itemId\": 19,\r\n  \"description\": \"sofa cama negro\",\r\n  \"price\": 4800.52,\r\n  \"quantity\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar item por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/search14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"search14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver todos los items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar item por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cupon",
+			"item": [
+				{
+					"name": "cupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"itemIds\": [\r\n    1,2,3,4,5,6\r\n  ],\r\n  \"amount\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/coupon/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favoritos",
+			"item": [
+				{
+					"name": "Favoriteados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/coupon/stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coupon",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
